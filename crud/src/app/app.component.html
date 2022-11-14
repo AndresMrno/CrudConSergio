@@ -1,0 +1,100 @@
+
+
+    <div class="formularioRegistro col-12 col-md-8 col-lg-6 col-xl-5 ">
+      <h2 class="fs-2">Crear usuario</h2>
+      <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
+    
+        <div class="form-group form-outline form-white mb-3 mg-4">
+          <label>Numero de identidad</label>
+          <input type="number" formControlName="numero_identidad" class="form-control mb-4 lg-1">
+        </div>
+    
+        <div class="form-group form-outline form-white mb-3 mg-4">
+          <label>Nombre</label>
+          <input type="text" formControlName="nombre" class="form-control">
+        </div>
+    
+        <div class="form-group form-outline form-white mb-3 mg-4">
+          <label>Apellidos</label>
+          <input type="text" formControlName="apellido" class="form-control">
+        </div>
+    
+        <div class="form-group form-outline form-white mb-3 mg-4">
+          <label>Fecha de nacimiento</label>
+          <input type="date" formControlName="fecha_nacimiento" class="form-control">
+        </div>
+    
+        <div class="form-group form-outline form-white mb-3 mg-4">
+          <label>Ciudad</label>
+          <select name="ciudad" id="ciudad" formControlName="id_ciudad_fk" class="form-control">
+            <option [ngValue]="item" *ngFor="let item of ciudades"> {{item.nombre_ciudad}} </option>
+          </select>
+        </div>
+    
+        <div class="form-group form-outline form-white mb-3 mg-4">
+          <label>Correo electronico</label>
+          <input type="email" formControlName="correo_electronico" class="form-control">
+        </div>
+    
+        <div class="form-group form-outline form-white mb-3 mg-4">
+          <label>telefono</label>
+          <input type="number" formControlName="telefono" class="form-control">
+        </div>
+    
+        <div class="form-group form-outline form-white mb-3 mg-4">
+          <label>ocupacion</label>
+          <select name="ocupacion" id="ocupacion" formControlName="id_ocupacion_fk" class="form-control">
+            <option [ngValue]="item" *ngFor="let item of ocupaciones">{{item.nombre_ocupacion}} </option>
+    
+          </select>
+        </div>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="usuarioForm.invalid">Guardar</button>
+    
+      </form>
+    </div>
+ 
+<div >
+<h2>Usuarios Registrados</h2>
+  <table class="table">
+
+    <thead>
+      <tr>
+        <th>Numero de identidad</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Fecha nacimiento</th>
+        <th>Ciudad</th>
+        <th>Correo electronico<th>
+        <th>Telefono</th>
+        <th>ocupacion</th>
+        <th>Opciones</th>
+        <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of usuarios">
+        <td> {{item.numero_identidad}} </td>
+        <td>{{item.nombre}}</td>
+        <td>{{item.apellido}}</td>
+        <td>{{item.fecha_nacimiento}}</td>
+        <td>{{item.id_ciudad_fk.nombre_ciudad}}</td>
+        <td>{{item.correo_electronico}}<td>
+        <td>{{item.telefono}}</td>
+        <td>{{item.id_ocupacion_fk.nombre_ocupacion}}</td>
+        <td>
+          <button type="button" class="btn btn-success" (click)="editar(item)" >Editar</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="eliminar(item)" >Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+
+
+
+
+
+<router-outlet></router-outlet>
